@@ -86,7 +86,7 @@ print('japanese tokens complete.')
 f = open('../data/keywords/keyphrases_jpn.txt', 'w')
 for phrases in phrases_list:
     for phrase in phrases:
-        f.write(phrase[0] + ',' + phrase[1] + '\n')
+        f.write(str(phrase[0]) + ',' + phrase[1] + '\n')
 f.close()
 
 print('japanese keyphrases complete.')
