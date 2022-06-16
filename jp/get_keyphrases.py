@@ -54,7 +54,7 @@ with open('../data/cleaned/news_contents_cleaned_japanese.txt', 'r') as f:
 
 f.close()
 
-text = ''.join(lines)
+# text = ''.join(lines)
 
 if not os.path.exists('../data/tokens/'):
     os.mkdir('../data/tokens/')
@@ -63,14 +63,16 @@ if not os.path.exists('../data/rake/'):
     os.mkdir('../data/rake/')
 
 f = open('../data/tokens/tokens_jpn.txt', 'w')
-tokens = tok.tokenize(text)
-for token in tokens:
-    f.write(token.surface + ',' + token.pos + ',' + token.pos_s1 + ',' +
-            token.pos_s2 + ',' + token.pos_s3 + ',' + token.conj + ',' +
-            token.form + '\n')
+
+for line in lines:
+    tokens = tok.tokenize(line)
+    for token in tokens:
+        f.write(token.surface + ',' + token.pos + ',' + token.pos_s1 + ',' +
+                token.pos_s2 + ',' + token.pos_s3 + ',' + token.conj + ',' +
+                token.form + '\n')
 f.close()
 
-print('japanese tokens done.')
+print('japanese tokens complete.')
 
 keywords = ja_rake.extract_keywords_from_text(tokens)
 
@@ -81,4 +83,4 @@ for phrase in phrases:
     f.write(phrase[0] + ',' + phrase[1] + '\n')
 f.close()
 
-print('japanese keyphrases done.')
+print('japanese keyphrases complete.')

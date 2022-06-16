@@ -1,1 +1,6 @@
+mecab==0.996.3
+mecab-ko==1.0.0
+mecab-ko-dic==1.0.0
 mecab-python3==1.0.5
+krwordrank==1.0.3
+
