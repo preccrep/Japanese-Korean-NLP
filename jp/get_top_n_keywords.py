@@ -1,4 +1,3 @@
-import keyword
 import os
 from rake import Rake
 
@@ -17,15 +16,20 @@ f.close()
 
 text = ''.join(lines)
 
-if not os.path.exists('../data/rake/'):
-    os.mkdir('../data/rake/')
+if not os.path.exists('../data/keywords/'):
+    os.mkdir('../data/keywords/')
 
 n = 50  # number of keywords
 
-f = open('../data/rake/keywords_jpn.txt', 'w')
+f = open('../data/keywords/keywords_jpn.txt', 'w')
+# for line in lines:
+#     keywords = rake.extract(line, n)
+#     for keyword in keywords:
+#         print(keyword)
+#         # f.write(keyword + '\n')
 keywords = rake.get_keywords(text, n)
 for keyword in keywords:
     f.write(keyword + '\n')
 f.close()
 
-print('japanese keywords done.')
+print('japanese keywords complete.')

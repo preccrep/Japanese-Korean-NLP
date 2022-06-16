@@ -59,13 +59,18 @@ f.close()
 if not os.path.exists('../data/tokens/'):
     os.mkdir('../data/tokens/')
 
-if not os.path.exists('../data/rake/'):
-    os.mkdir('../data/rake/')
+if not os.path.exists('../data/keywords/'):
+    os.mkdir('../data/keywords/')
 
 f = open('../data/tokens/tokens_jpn.txt', 'w')
 
+phrases_list = []
+
 for line in lines:
     tokens = tok.tokenize(line)
+    keywords = ja_rake.extract_keywords_from_text(tokens)
+    phrases = ja_rake.get_ranked_phrases_with_scores()
+    phrases_list.append(phrases)
     for token in tokens:
         f.write(token.surface + ',' + token.pos + ',' + token.pos_s1 + ',' +
                 token.pos_s2 + ',' + token.pos_s3 + ',' + token.conj + ',' +
@@ -74,13 +79,14 @@ f.close()
 
 print('japanese tokens complete.')
 
-keywords = ja_rake.extract_keywords_from_text(tokens)
+# keywords = ja_rake.extract_keywords_from_text(tokens)
 
-phrases = ja_rake.get_ranked_phrases_with_scores()
+# phrases = ja_rake.get_ranked_phrases_with_scores()
 
-f = open('../data/rake/keyphrases_jpn.txt', 'w')
-for phrase in phrases:
-    f.write(phrase[0] + ',' + phrase[1] + '\n')
+f = open('../data/keywords/keyphrases_jpn.txt', 'w')
+for phrases in phrases_list:
+    for phrase in phrases:
+        f.write(phrase[0] + ',' + phrase[1] + '\n')
 f.close()
 
 print('japanese keyphrases complete.')

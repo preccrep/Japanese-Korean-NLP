@@ -5,3 +5,4 @@
 > python clean.py
 ```
 
+I didn't remove the duplicates because they may have different art_ids.
